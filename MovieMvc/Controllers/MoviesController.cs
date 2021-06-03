@@ -11,6 +11,7 @@ using MovieMvc.Models;
 
 namespace MovieMvc.Controllers
 {
+    //[Authorize]
     public class MoviesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -122,7 +123,7 @@ namespace MovieMvc.Controllers
         }
 
         // GET: Movies/Delete/5
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin")] //Roles (rechtstreeks) aanmaken / toekennen op DB niveau 
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,7 +144,7 @@ namespace MovieMvc.Controllers
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin, SuperAdmin")] //Roles (rechtstreeks) aanmaken / toekennen op DB niveau 
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var movie = await _context.Movie.FindAsync(id);
