@@ -1,0 +1,47 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.FavouriteBook"></label>
+                <input asp-for="Input.FavouriteBook" class="form-control" disabled />
+                <span asp-validation-for="Input.FavouriteBook" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.FavouriteGenre"></label>
+                <select asp-for="Input.FavouriteGenre" asp-items="Html.GetEnumSelectList<Genre>()">
+                    <option selected="selected" value="value">Please select a value</option>
+                </select>
+                <span class="text-danger" asp-validation-for="Input.FavouriteGenre"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.LoggedInSince"></label>
+                <input asp-for="Input.LoggedInSince" class="form-control" disabled />
+                <span asp-validation-for="Input.LoggedInSince" class="text-danger"></span>
+            </div>
+            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
